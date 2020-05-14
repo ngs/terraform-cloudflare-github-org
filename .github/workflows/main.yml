@@ -1,0 +1,19 @@
+name: Terraform
+on: push
+
+jobs:
+  main:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hashicorp/setup-terraform@v1
+      - uses: actions/checkout@v2
+      - run: terraform init
+      - run: terraform validate
+      - name: Init test directory
+        run: terraform init
+        working-directory: test
+      - name: Validate test directory
+        run: terraform validate
+        working-directory: test
+
