@@ -11,9 +11,9 @@ resource "cloudflare_zone" "example" {
 
 module "github-org" {
   zone_id  = cloudflare_zone.example.id
-	source   = "ngs/github-org/cloudflare"
-	name     = "@"
-	org      = "instance0"
+  source   = "ngs/github-org/cloudflare"
+  name     = "@"
+  org      = "instance0"
   code     = "0123456789"
 }
 ```
