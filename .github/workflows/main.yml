@@ -3,13 +3,23 @@ on: push
 
 jobs:
   main:
-    name: Validate
+    name: Validate (Provider v${{ matrix.cloudflare_version }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cloudflare_version: ['3', '4']
     steps:
       - uses: hashicorp/setup-terraform@v1
       - uses: actions/checkout@v2
+      - name: Override provider version constraint
+        run: |
+          sed -i 's/version = ">= 3.0"/version = "~> ${{ matrix.cloudflare_version }}.0"/' terraform.tf
       - run: terraform init
       - run: terraform validate
+      - name: Override provider version constraint in test
+        run: |
+          sed -i 's/version = "~> 3.0"/version = "~> ${{ matrix.cloudflare_version }}.0"/' main.tf
+        working-directory: test
       - name: Init test directory
         run: terraform init
         working-directory: test
