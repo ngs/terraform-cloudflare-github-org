@@ -11,19 +11,10 @@ jobs:
     steps:
       - uses: hashicorp/setup-terraform@v1
       - uses: actions/checkout@v2
-      - name: Override provider version constraint
-        run: |
-          sed -i 's/version = ">= 3.0"/version = "~> ${{ matrix.cloudflare_version }}.0"/' terraform.tf
-      - run: terraform init
-      - run: terraform validate
-      - name: Override provider version constraint in test
-        run: |
-          sed -i 's/version = "~> 3.0"/version = "~> ${{ matrix.cloudflare_version }}.0"/' main.tf
-        working-directory: test
-      - name: Init test directory
+      - name: Init test directory (v${{ matrix.cloudflare_version }})
         run: terraform init
-        working-directory: test
-      - name: Validate test directory
+        working-directory: test-v${{ matrix.cloudflare_version }}
+      - name: Validate test directory (v${{ matrix.cloudflare_version }})
         run: terraform validate
-        working-directory: test
+        working-directory: test-v${{ matrix.cloudflare_version }}
 
