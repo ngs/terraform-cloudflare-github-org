@@ -3,17 +3,18 @@ on: push
 
 jobs:
   main:
-    name: Validate
+    name: Validate (Provider v${{ matrix.cloudflare_version }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cloudflare_version: ['3', '4']
     steps:
       - uses: hashicorp/setup-terraform@v1
       - uses: actions/checkout@v2
-      - run: terraform init
-      - run: terraform validate
-      - name: Init test directory
+      - name: Init test directory (v${{ matrix.cloudflare_version }})
         run: terraform init
-        working-directory: test
-      - name: Validate test directory
+        working-directory: test-v${{ matrix.cloudflare_version }}
+      - name: Validate test directory (v${{ matrix.cloudflare_version }})
         run: terraform validate
-        working-directory: test
+        working-directory: test-v${{ matrix.cloudflare_version }}
 
