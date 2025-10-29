@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        cloudflare_version: ['3', '4']
+        cloudflare_version: ['3', '4', '5']
     steps:
       - uses: hashicorp/setup-terraform@v1
       - uses: actions/checkout@v2
