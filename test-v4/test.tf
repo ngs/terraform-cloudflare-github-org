@@ -1,5 +1,6 @@
 resource "cloudflare_zone" "example" {
-  zone = "example.com"
+  account_id = "dummy-account-id"
+  zone       = "example.com"
 }
 
 module "test-github-org" {
