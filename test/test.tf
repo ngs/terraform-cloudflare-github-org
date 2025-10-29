@@ -9,4 +9,3 @@ module "test-github-org" {
 	org      = "instance0"
   code     = "0123456789"
 }
-

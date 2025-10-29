@@ -10,4 +10,3 @@
 
 # Lock files (but keep test directories' lock files)
 .terraform.lock.hcl
-!test*/.terraform.lock.hcl

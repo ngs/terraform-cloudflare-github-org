@@ -6,12 +6,11 @@ jobs:
     name: Validate
     runs-on: ubuntu-latest
     steps:
-      - uses: hashicorp/setup-terraform@v1
-      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@v5
       - name: Init test directory
         run: terraform init
         working-directory: test
       - name: Validate test directory
         run: terraform validate
         working-directory: test
-
